@@ -1,17 +1,19 @@
-import java.sql.*;
-import org.apache.commons.dbcp2.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import org.apache.commons.dbcp2.BasicDataSource;
 
-public class ResortDao {
+public class LiftRideDao {
   private static BasicDataSource dataSource;
 
-  public ResortDao() {
-    dataSource = ResortDataSource.getDataSource();
+  public LiftRideDao() {
+    dataSource = LiftDataSource.getDataSource();
   }
 
   public void createLiftRide(LiftRide newLiftRide) {
     Connection conn = null;
     PreparedStatement preparedStatement = null;
-    String insertQueryStatement = "INSERT INTO Resorts (resortId, seasonId, dayId, skierId, takeTime, liftId) " +
+    String insertQueryStatement = "INSERT INTO LiftRides (resortId, seasonId, dayId, skierId, takeTime, liftId) " +
         "VALUES (?,?,?,?,?,?)";
     try {
       conn = dataSource.getConnection();

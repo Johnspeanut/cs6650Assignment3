@@ -23,19 +23,20 @@ public class Main {
 //    factory.setUsername(userName);
 //    factory.setPassword(passwd);
     final Connection connection = factory.newConnection();
-    ResortDao liftRideDao = new ResortDao();
+    LiftRideDao liftRideDao = new LiftRideDao();
+    ResortDao resortDao = new ResortDao();
 
     Runnable runnable = new Runnable() {
       @Override
       public void run() {
         try{
           final Channel channel = connection.createChannel();
-          String myExchange = "broadcast";
-          channel.exchangeDeclare(myExchange, "fanout");
-          String queueName = channel.queueDeclare().getQueue();
-          channel.queueBind(queueName, myExchange, "");
+//          String myExchange = "broadcast";
+//          channel.exchangeDeclare(myExchange, "fanout");
+//          String queueName = channel.queueDeclare().getQueue();
+//          channel.queueBind(queueName, myExchange, "");
 
-          channel.queueDeclare(queueName, false, false,false,null);
+          channel.queueDeclare(QUEUE_NAME, false, false,false,null);
           channel.basicQos(10); //max one message per receiver
           System.out.println("[x] Awaiting PRC requests");
 
@@ -56,6 +57,8 @@ public class Main {
               int liftId = Integer.valueOf(result[5]);
 
               liftRideDao.createLiftRide(new LiftRide(resortId, seasonId, dayId, skierId, takeTime, liftId));
+              resortDao.createLiftRide(new LiftRide(resortId, seasonId, dayId, skierId, takeTime, liftId));
+
             }catch (RuntimeException e){
               System.out.println("Error : " + e.toString());
             }finally {

@@ -97,13 +97,13 @@ public class SkierServlet extends HttpServlet {
         try {
           Channel channel = blockingDeque.take();
           // https://subscription.packtpub.com/book/application-development/9781849516501/1/ch01lvl1sec14/broadcasting-messages
-          String myExchange = "broadcast";
-          channel.exchangeDeclare(myExchange, "fanout");
+//          String myExchange = "broadcast";
+//          channel.exchangeDeclare(myExchange, "fanout");
           channel.queueDeclare("post", false, false, false, null);
           String message = String.format("%d,%d,%d,%d,%d,%d",
               liftRide.getResortId(),liftRide.getSeasonId(),liftRide.getDayId(),liftRide.getSkierId()
               ,liftRide.getTime(), liftRide.getLiftId());
-          channel.basicPublish(myExchange, "", null, new Gson().toJson(message).getBytes());
+          channel.basicPublish("", "post", null, new Gson().toJson(message).getBytes());
           blockingDeque.add(channel);
         } catch (InterruptedException e) {
           e.printStackTrace();

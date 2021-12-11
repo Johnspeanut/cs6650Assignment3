@@ -1,18 +1,18 @@
 import org.apache.commons.dbcp2.*;
 
-public class DBCPDataSource {
+public class LiftDataSource {
   private static BasicDataSource dataSource;
 
-//  // NEVER store sensitive information below in plain text!
+  //  // NEVER store sensitive information below in plain text!
 //  private static final String HOST_NAME = System.getProperty("MySQL_IP_ADDRESS");
 //  private static final String PORT = System.getProperty("MySQL_PORT");
-  private static final String HOST_NAME = "databaseresort.c9cajovilaae.us-west-2.rds.amazonaws.com";
+  private static final String HOST_NAME = "databaseskier.c9cajovilaae.us-west-2.rds.amazonaws.com";
   private static final String PORT = "3306";
-  private static final String DATABASE = "databaseresort";
-//  private static final String USERNAME = System.getProperty("DB_USERNAME");
+  private static final String DATABASE = "databaseskier";
+  //  private static final String USERNAME = System.getProperty("DB_USERNAME");
 //  private static final String PASSWORD = System.getProperty("DB_PASSWORD");
   private static final String USERNAME = "pq";
-  private static final String PASSWORD = "database-resort-pq";
+  private static final String PASSWORD = "database-skier-pq";
 
   static {
     // https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-jdbc-url-format.html
