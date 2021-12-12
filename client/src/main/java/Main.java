@@ -76,10 +76,10 @@ public class Main {
 
       long endTime = System.currentTimeMillis();
       long wallTime = endTime - startTime;
-      int totalRequest = Counter.getNumFailure() + Counter.getNumSuccess();
+      int totalRequest = 100000;
       System.out.println("Number requests: " + totalRequest);
       System.out.println("Number of success: " + Counter.getNumSuccess());
-      System.out.println("Number of failure: " + Counter.getNumFailure());
+      System.out.println("Number of failure: " + (totalRequest - Counter.getNumSuccess()));
       System.out.printf("Throughput in requests per second: ", Counter.getNumSuccess() / (wallTime/1000));
     System.out.println("Mean response time (milliseconds): " + wallTime/totalRequest);
     System.out.println("Wall time (second): " + wallTime/1000);
